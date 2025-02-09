@@ -1,12 +1,26 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "@/models/User";
+import User from "@/app/models/User";
 import { connectDB } from "./db";
 import bcrypt from "bcryptjs";
-
+import GoogleProvider from "next-auth/providers/google"
+import InstagramProvider from "next-auth/providers/instagram"
+import FacebookProvider from "next-auth/providers/facebook"
 
 export const authOptions: NextAuthOptions = {
     providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+          }),
+          InstagramProvider({
+            clientId: process.env.INSTAGRAM_CLIENT_ID!,
+            clientSecret: process.env.INSTAGRAM_CLIENT_SECRET!
+          }),
+          FacebookProvider({
+            clientId: process.env.FACEBOOK_CLIENT_ID!,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+          }),
         CredentialsProvider(
             {
                 name: "Credentials",
@@ -33,19 +47,20 @@ export const authOptions: NextAuthOptions = {
                         throw err
                     }
 
-                }
-            }
-
-        )
+                },
+                
+            }, 
+        ),
+        
     ],
     callbacks: {
         async jwt({ user, token }) {
-            token.id =user.id; 
-            return token
+         if(user)token.id =user.id; 
+        return token
 
         },
         async session({ session, token }) {
-            if (session.user) {
+            if (session.user&&token.id) {
                 session.user.id= token.id as string
 
             }
@@ -53,10 +68,7 @@ export const authOptions: NextAuthOptions = {
         }
 
     },
-    pages: {
-        signIn: '/login',
-        error: '/login'
-    },
+   
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60
