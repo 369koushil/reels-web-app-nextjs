@@ -1,21 +1,37 @@
 "use client"
-import React,{useState} from 'react'
-import { useForm, SubmitHandler } from "react-hook-form"
+import React,{useState,useEffect} from 'react'
+import { useForm } from "react-hook-form"
 import FileUpload from './FileUpload'
 import { IKUploadResponse } from 'imagekitio-next/dist/types/components/IKUpload/props'
 import { myClient } from '../libs/api-client'
 import { Loader2 } from "lucide-react";
+import mongoose, { Mongoose } from 'mongoose'
+import { useSession } from 'next-auth/react'
 
 interface VideoFormData {
     title: string;
     description: string;
     videoUrl: string;
     thumbnailUrl: string;
+    user:mongoose.Types.ObjectId
+    isPublic:boolean
   }
 const VideoUploadPage = () => {
 
     const [loading, setLoading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const {data:session}=useSession();
+
+    useEffect(() => {
+      if (session?.user?.id) {
+          try {
+              const userId = new mongoose.Types.ObjectId(session.user.id);
+              setValue("user", userId);
+          } catch (error) {
+              console.error("Invalid user ID:", error);
+          }
+      }
+  }, [session]);
 
     const {
         register,
@@ -27,7 +43,9 @@ const VideoUploadPage = () => {
             title:"",
             description:"",
             videoUrl:"",
-            thumbnailUrl:""
+            thumbnailUrl:"",
+            user:new mongoose.Types.ObjectId(),
+            isPublic:false
         }
     })
 

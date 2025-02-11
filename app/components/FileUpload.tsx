@@ -51,17 +51,17 @@ export default function FileUpload({
         setError("Please upload a valid video file");
         return false;
       }
-      if (file.size > 5 * 1024 * 1024) {
-        setError("Video size must be less than 100MB");
-        return false;
-      }
+      // if (file.size > 100* 1024 * 1024) {
+      //   setError("Video size must be less than 100MB");
+      //   return false;
+      // }
     } else {
       const validTypes = ["image/jpeg", "image/png", "image/webp"];
       if (!validTypes.includes(file.type)) {
         setError("Please upload a valid image file (JPEG, PNG, or WebP)");
         return false;
       }
-      if (file.size > 5 * 1024 * 1024) {
+      if (file.size > 100* 1024 * 1024) {
         setError("File size must be less than 5MB");
         return false;
       }

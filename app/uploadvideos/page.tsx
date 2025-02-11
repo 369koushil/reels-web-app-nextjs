@@ -8,7 +8,6 @@ const page = () => {
     <Providers>
     <VideoUploadPage/>
     </Providers>
-   
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "./User";
 
 export interface IVideo{
     _id?:mongoose.Types.ObjectId,
@@ -11,7 +12,11 @@ export interface IVideo{
         height:number,
         width:number,
         quality?:number
-    }
+    },
+    isPublic:boolean,
+    user:mongoose.Types.ObjectId
+
+    
 }
 
 export const VIDEO_DIMENSIONS = {
@@ -31,7 +36,10 @@ const videoSchema= new mongoose.Schema<IVideo>(
           width: { type: Number, default: VIDEO_DIMENSIONS.width },
           quality: { type: Number, min: 1, max: 100 },
         },
+        isPublic:{type:Boolean,default:false},
+        user:{type:mongoose.Schema.Types.ObjectId , ref:"User",required:true}
       },
+
       { timestamps: true }
     
 )

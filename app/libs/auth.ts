@@ -4,23 +4,23 @@ import User from "@/app/models/User";
 import { connectDB } from "./db";
 import bcrypt from "bcryptjs";
 import GoogleProvider from "next-auth/providers/google"
-import InstagramProvider from "next-auth/providers/instagram"
-import FacebookProvider from "next-auth/providers/facebook"
+// import InstagramProvider from "next-auth/providers/instagram"
+// import FacebookProvider from "next-auth/providers/facebook"
 
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-          }),
-          InstagramProvider({
-            clientId: process.env.INSTAGRAM_CLIENT_ID!,
-            clientSecret: process.env.INSTAGRAM_CLIENT_SECRET!
-          }),
-          FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID!,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
-          }),
+        }),
+        //   InstagramProvider({
+        //     clientId: process.env.INSTAGRAM_CLIENT_ID!,
+        //     clientSecret: process.env.INSTAGRAM_CLIENT_SECRET!
+        //   }),
+        //   FacebookProvider({
+        //     clientId: process.env.FACEBOOK_CLIENT_ID!,
+        //     clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+        //   }),
         CredentialsProvider(
             {
                 name: "Credentials",
@@ -48,30 +48,49 @@ export const authOptions: NextAuthOptions = {
                     }
 
                 },
-                
-            }, 
+
+            },
         ),
-        
+
     ],
     callbacks: {
+
         async jwt({ user, token }) {
-         if(user)token.id =user.id; 
-        return token
+            if (user) token.id = user.id;
+            return token
 
         },
         async session({ session, token }) {
-            if (session.user&&token.id) {
-                session.user.id= token.id as string
+            if (session.user && token.id) {
+                session.user.id = token.id as string
 
             }
             return session
-        }
+        },
+        async signIn({ user }) {
+
+            try {
+                await connectDB()
+                const existingUser = await User.findOne({ email: user.email })
+                if (!existingUser) {
+                    await User.create({
+                        email: user.email,
+                        password: "123456"
+                    })
+                }
+                return true;
+
+            } catch (err) {
+                console.log(err)
+                return false;
+            }
+        },
 
     },
-   
+
     session: {
         strategy: "jwt",
         maxAge: 30 * 24 * 60 * 60
     },
-    secret:process.env.AUTH_SECRET
+    secret: process.env.AUTH_SECRET
 }

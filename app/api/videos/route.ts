@@ -44,7 +44,7 @@ export async function POST(req:NextRequest){
           width: 1080,
           quality: body.transformation?.quality ?? 100,
         },
-
+        user:session.user.id
         
       };
 
