@@ -3,7 +3,14 @@
 import React from "react";
 import { myClient } from "../libs/api-client";
 
-const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:{setPublicReelsLoading:any, setPublicVideos:any,active:any,setActive:any}) => {
+interface NavbarProps {
+  setPublicReelsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setPublicVideos: React.Dispatch<React.SetStateAction<any[]>>; // Replace `any[]` with the actual data type for videos if known
+  active: string;
+  setActive: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:NavbarProps) => {
  
   
 

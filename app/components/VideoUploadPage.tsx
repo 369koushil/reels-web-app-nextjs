@@ -6,6 +6,7 @@ import { IKUploadResponse } from 'imagekitio-next/dist/types/components/IKUpload
 import { myClient } from '../libs/api-client'
 import { Loader2 } from "lucide-react";
 import { useSession } from 'next-auth/react'
+import mongoose from 'mongoose'
 
 interface VideoFormData {
     title: string;

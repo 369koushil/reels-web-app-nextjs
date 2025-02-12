@@ -2,8 +2,9 @@ import React from 'react';
 import { Upload as UploadIcon } from 'lucide-react';
 import VideoFeed from '../components/VideoFeed';
 import { useRouter } from 'next/navigation';
+import { IVideo } from '../models/Video';
 
-const YourReel = ({ videoData }: { videoData: any }) => {
+const YourReel = ({ videoData }: { videoData:IVideo[] }) => {
   const router = useRouter();
 
   return (

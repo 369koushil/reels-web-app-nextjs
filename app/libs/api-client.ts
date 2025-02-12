@@ -1,51 +1,49 @@
-
 import axios, { Method, AxiosRequestConfig } from "axios";
 import { IVideo } from "../models/Video";
 
 export type VideoFormData = Omit<IVideo, "_id">;
 
-type fetchOptions = {
-    method?: Method
-    body?: any,
-    headers?: Record<string, string>
-}
+type fetchOptions<T = any> = {
+    method?: Method;
+    body?: T;
+    headers?: Record<string, string>;
+};
 
 class myApiClient {
-    private async fetch(endpoint: string, options: fetchOptions = {}) {
-        const { method = "GET", body, headers } = options
+    private async fetch<T>(endpoint: string, options: fetchOptions<T> = {}) {
+        const { method = "GET", body, headers } = options;
         const config: AxiosRequestConfig = {
             method,
             url: `/api${endpoint}`,
             headers: {
                 "Content-Type": "application/json",
-                ...headers
+                ...headers,
             },
-            ...(method !== "GET" ? { data: body } : {})
-        }
+            ...(method !== "GET" ? { data: body } : {}),
+        };
 
         try {
             const response = await axios(config);
-            return response.data;
+            return response.data as T;
         } catch (error) {
-            return error
+            return error;
         }
     }
 
     async getVideos() {
-        return this.fetch("/videos")
+        return this.fetch<IVideo[]>("/videos");
     }
 
     async createVideos(videoData: VideoFormData) {
         return this.fetch("/videos", {
             method: "POST",
-            body: videoData
-        })
+            body: videoData,
+        });
     }
 
-    async getPublicVideos(){
-        return this.fetch("/videos/public");
+    async getPublicVideos() {
+        return this.fetch<IVideo[]>("/videos/public");
     }
 }
 
-
- export const myClient =new myApiClient();
+export const myClient = new myApiClient();
