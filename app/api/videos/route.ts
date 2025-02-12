@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 
 
 
-export async function GET(req:NextRequest){
+export async function GET(){
      try{
       const session= await getServerSession(authOptions)
       console.log(session?.user.id.length)

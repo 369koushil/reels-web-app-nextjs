@@ -11,6 +11,7 @@ export async function GET() {
     try{
         return NextResponse.json(imagekit.getAuthenticationParameters());
     }catch(err){
+        console.log(err)
         NextResponse.json({error:"imageKit auth falied"},{status:400})
     }
  
