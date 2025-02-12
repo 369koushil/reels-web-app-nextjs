@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
 
                         const isValid = await bcrypt.compare(credentials.password, user.password)
                         if (!isValid) throw new Error("please check your password")
-
+                        
                         return {
                             id: user._id.toString(),
                             email: user.email
@@ -68,23 +68,29 @@ export const authOptions: NextAuthOptions = {
             return session
         },
         async signIn({ user }) {
-
             try {
-                await connectDB()
-                const existingUser = await User.findOne({ email: user.email })
+                await connectDB();
+                const existingUser = await User.findOne({ email: user.email });
+        
                 if (!existingUser) {
-                    await User.create({
+                    const newUser = await User.create({
                         email: user.email,
-                        password: "123456"
-                    })
+                        password: await bcrypt.hash("123456", 10),
+                    });
+        
+                    user.id = newUser._id.toString(); 
+                } else {
+                    user.id = existingUser._id.toString(); 
                 }
-                return true;
-
+        
+                return true; 
+        
             } catch (err) {
-                console.log(err)
+                console.error(err);
                 return false;
             }
         },
+        
 
     },
 

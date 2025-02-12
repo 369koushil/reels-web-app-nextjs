@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 
-const Navbar = () => {
-  const [active, setActive] = useState("your reels");
+const Navbar = ({active,setActive}:{active:any,setActive:any}) => {
+ 
 
   return (
     <div className="fixed bottom-8 left-[44%]">

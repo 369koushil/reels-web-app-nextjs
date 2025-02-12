@@ -87,7 +87,7 @@ export default function LoginPage() {
         provider.id !== "credentials" ? ( 
           <button className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-blue-900 hover:bg-blue-950" key={provider.id} onClick={() => {
             signIn(provider.id)
-            router.push("/")
+            router.push("/home")
           }
           }>
             Login with {provider.name}
@@ -97,7 +97,7 @@ export default function LoginPage() {
     </div>
 </div>
   <div className="flex justify-center pt-3 items-center" >
-      <p className="text-white ">Don't have an account? <Link href={"/login"} className="text-blue-400 hover:underline cursor-pointer ">SignUp</Link></p>
+      <p className="text-white ">Don't have an account? <Link href={"/signup"} className="text-blue-400 hover:underline cursor-pointer ">SignUp</Link></p>
     </div>
     </div>
    

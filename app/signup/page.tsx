@@ -88,7 +88,7 @@ const {data:session}=useSession();
           provider.id !== "credentials" ? ( 
             <button className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-blue-900 hover:bg-blue-950" key={provider.id} onClick={() => {
               signIn(provider.id)
-              router.push("/")
+              router.push("/home")
             }
             }>
               Sign up with {provider.name}

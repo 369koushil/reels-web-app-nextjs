@@ -4,14 +4,20 @@ import Video from "@/app/models/Video";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { IVideo } from "@/app/models/Video";
+import mongoose from "mongoose";
 
-export async function GET(){
+export async function GET(req:NextRequest){
      try{
+      const session= await getServerSession(authOptions)
+      console.log(session?.user.id.length)
+      if(!session)return NextResponse.json({msg:"user unauthorizsed"},{status:200})
         await connectDB();
-        const videos=await Video.find({}).sort({createdAt:-1})
+        const userId=new mongoose.Types.ObjectId(session.user.id)
+        const videos=await Video.find({user:userId}).sort({createdAt:-1})
         if(!videos||videos.length===0)return NextResponse.json([],{status:200})
             return NextResponse.json(videos,{status:200})
      }catch(err){
+      console.log(err)
         return NextResponse.json({error:"failed to get video"},{status:200})
      }
 }
