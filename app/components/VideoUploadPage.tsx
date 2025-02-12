@@ -31,7 +31,7 @@ const VideoUploadPage = () => {
               console.error("Invalid user ID:", error);
           }
       }
-  }, [session]);
+  }, []);
 
     const {
         register,
