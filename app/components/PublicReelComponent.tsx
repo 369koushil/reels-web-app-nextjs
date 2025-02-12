@@ -1,12 +1,51 @@
-"use client"
-import React from 'react'
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { IVideo } from "../models/Video";
 
-const PublicReelComponent = () => {
+export default function PublicReelComponent({videosData}:{videosData:IVideo[]}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    videoRefs.current.forEach((video, index) => {
+      if (video) {
+        if (index === currentIndex) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    });
+  }, [currentIndex]);
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollY = e.currentTarget.scrollTop;
+    const index = Math.round(scrollY / window.innerHeight);
+    setCurrentIndex(index);
+  };
+
   return (
-    <div className='flex h-full justify-center'>
-      <div className="h-full w-1/4 bg-blue-900">320×568</div>
+    <div
+      className="h-screen overflow-y-auto snap-y snap-mandatory bg-black flex justify-center"
+      onScroll={handleScroll}
+    >
+      <div className="w-full flex flex-col items-center">
+        {videosData.map((video, index) => (
+          <div
+            key={video._id?.toString()}
+            className="relative w-full md:w-3/5 lg:w-2/5 h-screen flex justify-center items-center snap-center"
+          >
+            <video
+              ref={(el) => {videoRefs.current[index] = el}}
+              className="w-full h-full object-contain rounded-lg"
+              src={`${process.env.NEXT_PUBLIC_URL_ENDPOINT}/${video.videoUrl}`}
+              loop
+              muted
+              playsInline
+            />
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
-
-export default PublicReelComponent

@@ -86,10 +86,14 @@ const VideoUploadPage = () => {
 
    
   return (
-   <form onSubmit={handleSubmit(onsubmit)}>
+  <div className='flex flex-col gap-y-12'>
+    <h1 className='text-2xl font-medium flex justify-center select-none pt-4'>Upload reel here </h1>
 
-<div className="form-control">
-        <label className="label">Title</label>
+    <div className='flex justify-center items-center h-full'>
+     <form className='bg-gray-800 w-[40%] p-4 rounded-lg' onSubmit={handleSubmit(onsubmit)}>
+
+<div className="form-control ">
+        <label className="label text-gray-300 text-lg">Title</label>
         <input
           type="text"
           className={`input input-bordered ${
@@ -105,9 +109,9 @@ const VideoUploadPage = () => {
       </div>
 
       <div className="form-control">
-        <label className="label">Description</label>
+        <label className="label text-gray-300 text-lg">Description</label>
         <textarea
-          className={`textarea textarea-bordered h-24 ${
+          className={`textarea max-h-36 textarea-bordered h-24 ${
             errors.description ? "textarea-error" : ""
           }`}
           {...register("description", { required: "Description is required" })}
@@ -119,8 +123,9 @@ const VideoUploadPage = () => {
         )}
       </div>
 
+      <div className='flex gap-y-4 flex-col'>
       <div className="form-control">
-        <label className="label">Upload Video</label>
+        <label className="label text-gray-300 text-lg">Upload Video</label>
         <FileUpload
           fileType="video"
           onSuccess={handleUploadSuccess}
@@ -136,11 +141,13 @@ const VideoUploadPage = () => {
         )}
       </div>
 
+      <div className='flex gap-y-4 flex-col'>
       <button
         type="submit"
         className="btn btn-primary btn-block"
         disabled={loading || uploadProgress<100}
       >
+        <div className='flex gap-y-4'>
         {loading ? (
           <>
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -149,9 +156,16 @@ const VideoUploadPage = () => {
         ) : (
           "Publish Video"
         )}
+        </div>
       </button>
+      </div>
        
+      </div>
+
+      
    </form>
+  </div>
+  </div>
   )
 }
 

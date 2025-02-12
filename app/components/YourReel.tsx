@@ -7,14 +7,14 @@ const YourReel = ({ videoData }: { videoData: any }) => {
   const router = useRouter();
 
   return (
-    <div> 
+    <div > 
       {videoData.length === 0 ? (
-        <div className="flex justify-center gap-x-2 h-full items-center">
+        <div className='fixed top-[45%] left-[40%] flex p-4 bg-lime-600 rounded-lg text-black justify-center gap-x-2 h-full cursor-pointer  items-center' onClick={() => router.push("/uploadvideos")} >
           <UploadIcon
-            onClick={() => router.push("/uploadvideos")}
-            className="w-12 cursor-pointer select-none h-12 text-gray-500"
+            
+            className="w-12 select-none h-12 "
           />
-          <p className="text-lg select-none text-gray-500 mt-2">Upload your first video!</p>
+          <p className="text-lg select-none font-semibold mt-2">Upload your first video!</p>
         </div>
       ) : (
         <VideoFeed videos={videoData} />

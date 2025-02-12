@@ -6,6 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { IVideo } from "@/app/models/Video";
 import mongoose from "mongoose";
 
+
+
+
 export async function GET(req:NextRequest){
      try{
       const session= await getServerSession(authOptions)

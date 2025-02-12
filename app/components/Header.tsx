@@ -3,6 +3,7 @@ import React from 'react'
 import { signOut } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
 import image from '../blank_profile.png'
+import Link from 'next/link'
 
 const Header = () => {
   const {data:session,status}=useSession()
@@ -24,11 +25,16 @@ const Header = () => {
       <ul
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-300  rounded-box z-[1] mt-3 w-52 p-3 shadow">
-        <li className='py-6'>
+        <li className='py-2'>
           <a className="justify-between h-8 font-medium text-base  hover:bg-gray-700  bg-gray-800">
             Profile
             <span >{session?.user.name?.split(" ")[0]}</span>
           </a>
+        </li>
+        <li className='py-2'>
+          <Link href='/uploadvideos' className="justify-between h-8 font-medium text-base  hover:bg-gray-700  bg-gray-800">
+            Upload reels
+          </Link>
         </li>
         <li>  <button onClick={() => signOut({callbackUrl:"/login"})} className="btn btn-error w-full">Logout</button></li>
       </ul>

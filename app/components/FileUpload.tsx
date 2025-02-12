@@ -56,11 +56,7 @@ export default function FileUpload({
       //   return false;
       // }
     } else {
-      const validTypes = ["image/jpeg", "image/png", "image/webp"];
-      if (!validTypes.includes(file.type)) {
-        setError("Please upload a valid image file (JPEG, PNG, or WebP)");
-        return false;
-      }
+     
       if (file.size > 100* 1024 * 1024) {
         setError("File size must be less than 5MB");
         return false;

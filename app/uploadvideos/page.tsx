@@ -4,7 +4,7 @@ import React from 'react'
 import Providers from "../components/Providers";
 const page = () => {
   return (
-    <div>
+    <div className="h-screen w-screen">
     <Providers>
     <VideoUploadPage/>
     </Providers>

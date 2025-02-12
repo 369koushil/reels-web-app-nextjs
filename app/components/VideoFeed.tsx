@@ -9,8 +9,7 @@ interface VideoFeedProps {
 export default function VideoFeed({ videos }: VideoFeedProps) {
   return (
     <ImageKitProvider urlEndpoint={process.env.NEXT_PUBLIC_URL_ENDPOINT}>
-       <div className="grid grid-cols-1
-        pt-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+       <div  className="flex flex-row gap-x-4 gap-y-6 flex-wrap justify-start pl-4">
       {videos.map((video) => (
        <div className="w-72"> <VideoComponent  key={video._id?.toString()} video={video} /></div>
       ))}

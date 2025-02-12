@@ -41,6 +41,10 @@ class myApiClient {
             body: videoData
         })
     }
+
+    async getPublicVideos(){
+        return this.fetch("/videos/public");
+    }
 }
 
 

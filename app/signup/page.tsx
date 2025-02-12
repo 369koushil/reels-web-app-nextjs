@@ -79,16 +79,16 @@ const {data:session}=useSession();
   <input type="password" placeholder="*******"  className="grow text-orange-200" value={password} onChange={e=>setPassword(e.target.value)} />
 </label>
 
-<button onClick={handleSignup} className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-green-800 hover:bg-green-900">Sign up</button>
+<button onClick={handleSignup} className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-green-700 hover:bg-green-900">Sign up</button>
 </div>
 <div className="flex flex-col gap-y-2">
       <h3 className="text-xl text-center">Or</h3>
       {providers &&
         Object.values(providers).map((provider: any) =>
           provider.id !== "credentials" ? ( 
-            <button className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-blue-900 hover:bg-blue-950" key={provider.id} onClick={() => {
-              signIn(provider.id)
-              router.push("/home")
+            <button className="px-12 py-4 rounded-xl text-black  text-lg bg-white hover:bg-gray-300" key={provider.id} onClick={() => {
+              signIn(provider.id,{ callbackUrl: "/home" })
+             
             }
             }>
               Sign up with {provider.name}
