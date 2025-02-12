@@ -2,11 +2,10 @@
 import React from 'react'
 import { signOut } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
-import image from '../blank_profile.png'
 import Link from 'next/link'
 
 const Header = () => {
-  const {data:session,status}=useSession()
+  const {data:session}=useSession()
   return (
     <div>
       <div className="navbar bg-base-300">
@@ -19,7 +18,7 @@ const Header = () => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS Navbar component"
-            src={session?.user.image!} />
+            src={session?.user.image!||"https://ik.imagekit.io/kx5q7kr95/blank_profile.png?updatedAt=1739388776297"} />
         </div>
       </div>
       <ul

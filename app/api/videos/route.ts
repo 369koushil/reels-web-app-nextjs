@@ -61,6 +61,7 @@ export async function POST(req:NextRequest){
       return NextResponse.json(newVideo);
 
     }catch(err){
+      console.log(err)
         return NextResponse.json({error:"failed to create video"},{status:200})
      }
 }

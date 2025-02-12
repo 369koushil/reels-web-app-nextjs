@@ -1,6 +1,6 @@
 "use client"; // ✅ This must be added to use useState
 
-import React, { useState } from "react";
+import React from "react";
 import { myClient } from "../libs/api-client";
 
 const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:{setPublicReelsLoading:any, setPublicVideos:any,active:any,setActive:any}) => {

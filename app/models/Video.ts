@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import User from "./User";
 
 export interface IVideo{
     _id?:mongoose.Types.ObjectId,

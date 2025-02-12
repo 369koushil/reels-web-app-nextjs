@@ -7,8 +7,6 @@ import YourReel from "../components/YourReel";
 import PublicReelComponent from "../components/PublicReelComponent";
 import Header from "../components/Header";
 import YourReelSkeleton from "../components/YourReelSkeleton";
-import Skeleton from "../components/Skeleton";
-import Skeleton2 from "../components/Skeleton2";
 
 const Page = () => {
   const { data: session } = useSession();

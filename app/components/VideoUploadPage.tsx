@@ -5,7 +5,6 @@ import FileUpload from './FileUpload'
 import { IKUploadResponse } from 'imagekitio-next/dist/types/components/IKUpload/props'
 import { myClient } from '../libs/api-client'
 import { Loader2 } from "lucide-react";
-import mongoose, { Mongoose } from 'mongoose'
 import { useSession } from 'next-auth/react'
 
 interface VideoFormData {

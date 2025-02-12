@@ -9,7 +9,6 @@ const imagekit = new ImageKit({
 
 export async function GET() {
     try{
-        const authParameters=imagekit.getAuthenticationParameters()
         return NextResponse.json(imagekit.getAuthenticationParameters());
     }catch(err){
         NextResponse.json({error:"imageKit auth falied"},{status:400})
