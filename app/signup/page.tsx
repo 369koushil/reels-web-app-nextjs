@@ -1,25 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getProviders, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import ProviderBtnSignup from "../components/ProviderBtnSignup";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null); // Updated type for providers
   const router = useRouter();
   const { data: session } = useSession();
 
   useEffect(() => {
-    const fetchProviders = async () => {
-      const provs = await getProviders();
-      setProviders(provs);
-    };
-    fetchProviders();
-
     if (session) {
       router.push("/home");
     }
@@ -100,20 +93,7 @@ export default function SignupPage() {
           </div>
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl text-center">Or</h3>
-            {providers &&
-              Object.values(providers).map((provider) =>
-                provider.id !== "credentials" ? (
-                  <button
-                    className="px-12 py-4 rounded-xl text-black text-lg bg-white hover:bg-gray-300"
-                    key={provider.id}
-                    onClick={() => {
-                      signIn(provider.id, { callbackUrl: "/home" });
-                    }}
-                  >
-                    Sign up with {provider.name}
-                  </button>
-                ) : null
-              )}
+            <ProviderBtnSignup/>
           </div>
         </div>
         <div className="flex justify-center pt-3 items-center">
