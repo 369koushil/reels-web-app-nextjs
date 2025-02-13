@@ -30,19 +30,21 @@ class myApiClient {
         }
     }
 
-    async getVideos() {
-        return this.fetch<IVideo[]>("/videos");
+    async getVideos():Promise<IVideo[]> {
+        const response=await this.fetch("/videos");
+        return response as IVideo[];
     }
 
     async createVideos(videoData: VideoFormData) {
-        return this.fetch("/videos", {
+        return await this.fetch("/videos", {
             method: "POST",
             body: videoData,
         });
     }
 
-    async getPublicVideos() {
-        return this.fetch<IVideo[]>("/videos/public");
+    async getPublicVideos():Promise<IVideo[]> {
+        const response= await this.fetch<IVideo[]>("/videos/public");
+        return response as IVideo[];
     }
 }
 

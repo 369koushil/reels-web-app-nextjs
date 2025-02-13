@@ -2,10 +2,11 @@
 
 import React from "react";
 import { myClient } from "../libs/api-client";
+import { IVideo } from "../models/Video";
 
 interface NavbarProps {
   setPublicReelsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setPublicVideos: React.Dispatch<React.SetStateAction<any[]>>; // Replace `any[]` with the actual data type for videos if known
+  setPublicVideos: React.Dispatch<React.SetStateAction<IVideo[]>>; // Replace `any[]` with the actual data type for videos if known
   active: string;
   setActive: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -29,7 +30,7 @@ const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:Navbar
           <a
             onClick={async() => {
               setActive("public reels")
-              const data=await myClient.getPublicVideos()
+              const data =await myClient.getPublicVideos()
               setPublicVideos(data)
               setPublicReelsLoading(false)
             }}
