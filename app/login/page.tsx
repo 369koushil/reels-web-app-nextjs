@@ -2,18 +2,24 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { getProviders } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import ProviderBtnLogin from "../components/ProviderBtnLogin";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [providers, setProviders] = useState<Record<string, { id: string; name: string }> | null>(null);
   const { data: session } = useSession();
 
   useEffect(() => {
+    const fetchProviders = async () => {
+      const provs = await getProviders();
+      setProviders(provs);
+    };
+    fetchProviders();
     if (session) {
       router.push("/home");
     }
@@ -64,7 +70,21 @@ export default function LoginPage() {
           </div>
           <div className="flex flex-col gap-y-2">
             <h3 className="text-xl text-center">Or</h3>
-            <ProviderBtnLogin/>
+            {providers &&
+              Object.values(providers).map((provider) =>
+                provider.id !== "credentials" ? (
+                  <button
+                    className="px-12 py-4 rounded-xl text-white font-semibold text-lg bg-blue-900 hover:bg-blue-950"
+                    key={provider.id}
+                    onClick={() => {
+                      signIn(provider.id, { callbackUrl: "/home" });
+                      router.push("/home");
+                    }}
+                  >
+                    Login with {provider.name}
+                  </button>
+                ) : null
+              )}
           </div>
         </div>
         <div className="flex justify-center pt-3 items-center">
