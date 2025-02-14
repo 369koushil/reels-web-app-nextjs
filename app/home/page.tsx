@@ -37,15 +37,15 @@ const Page = () => {
   
 
   return (
-    <div className="">
+    <div className="bg-primarybg h-screen">
       {active === "your reels" ? (
         <div className="flex flex-col gap-y-4">
           <Header />
           {loading ? <YourReelSkeleton /> : <YourReel videoData={videoData} />}
         </div>
       ) : (
-        <div>
-          {publicReelsLoading ? <div className="flex bg-black w-screen h-screen justify-center items-center">  <div className="skeleton h-full w-full  md:w-3/5 lg:w-[28%]"></div></div> : <PublicReelComponent videosData={publicVideos} />}
+        <div className="bg-primarybg">
+          {publicReelsLoading ? <div className="flex bg-primarybg w-screen h-screen justify-center items-center">  <div className="skeleton bg-primarybg h-full w-full  md:w-3/5 lg:w-[28%]"></div></div> : <PublicReelComponent videosData={publicVideos} />}
         </div>
       )}
       <Navbar setPublicReelsLoading={setPublicReelsLoading} setPublicVideos={setPublicVideos} active={active} setActive={setActive} />

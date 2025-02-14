@@ -28,8 +28,8 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable}  antialiased`}
+      <body 
+        className={`${geistSans.variable} ${geistMono.variable} bg-primarybg  antialiased`}
       >
         
         {children}

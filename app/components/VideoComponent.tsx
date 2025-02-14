@@ -5,7 +5,7 @@ export default function VideoComponent({ video }: { video: IVideo }) {
 
 
   return (
-    <div className="card bg-base-100  hover:shadow-black shadow-2xl transition-all duration-300">
+    <div className="card bg-cardbg hover:shadow-cardbg text-primaryh shadow-2xl transition-all duration-300">
       <figure className="relative px-4 pt-4">
         
           <div

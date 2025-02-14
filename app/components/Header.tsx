@@ -10,8 +10,8 @@ const Header = () => {
   const userImage = session?.user?.image || "https://ik.imagekit.io/kx5q7kr95/blank_profile.png?updatedAt=1739388776297";
 
   return (
-    <div>
-      <div className="navbar bg-base-300">
+    <div className="border-b-2 border-black">
+      <div className="navbar text-primaryh bg-primarybg">
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">ReelsPro</a>
         </div>
@@ -29,10 +29,10 @@ const Header = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-3 shadow"
+              className="menu menu-sm bg-gray-200 dropdown-content  rounded-lg z-[1] mt-3 w-52 p-3 shadow"
             >
               <li className="py-2">
-                <a className="justify-between h-8 font-medium text-base hover:bg-gray-700 bg-gray-800">
+                <a className="justify-between text-primaryh border-2 border-black h-8 font-medium text-base hover:bg-white bg-gray-200">
                   Profile
                   <span>{session?.user.name?.split(" ")[0]}</span>
                 </a>
@@ -40,7 +40,7 @@ const Header = () => {
               <li className="py-2">
                 <Link
                   href="/uploadvideos"
-                  className="justify-between h-8 font-medium text-base hover:bg-gray-700 bg-gray-800"
+                  className="justify-between border-2 border-black  h-8 font-medium text-base hover:bg-primarynav bg-primarynav"
                 >
                   Upload reels
                 </Link>

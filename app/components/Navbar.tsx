@@ -16,12 +16,12 @@ const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:Navbar
   
 
   return (
-    <div className="fixed bottom-8 left-[42%]">
-      <ul className="menu text-lg font-medium menu-vertical lg:menu-horizontal bg-base-200 rounded-box">
+    <div className="fixed  bottom-8 border-2 border-black rounded-xl left-[42%]">
+      <ul className="menu text-primaryh text-lg font-medium menu-vertical lg:menu-horizontal bg-primarybg rounded-box">
         <li>
           <a
             onClick={() => setActive("your reels")}
-            className={active === "your reels" ? "bg-gray-700 hover:bg-gray-700" : ""}
+            className={active === "your reels" ? "bg-primarynav hover:bg-primarynavhover" : ""}
           >
             Your reels
           </a>
@@ -34,7 +34,7 @@ const Navbar = ({setPublicReelsLoading, setPublicVideos,active,setActive}:Navbar
               setPublicVideos(data)
               setPublicReelsLoading(false)
             }}
-            className={active === "public reels" ? "bg-gray-700" : ""}
+            className={active === "public reels" ? "bg-primarynav hover:bg-primarynavhover" : ""}
           >
             Public reels
           </a>
