@@ -44,21 +44,21 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-primarybg text-white">
-      <div className="bg-gray-100 shadow-xl p-10 rounded-xl w-96 border border-gray-700">
-        <h2 className="text-2xl font-bold text-center text-primary">Sign Up</h2>
-        {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+    <div className="h-screen flex-col gap-y-4 flex items-center justify-center  bg-primarybg text-white">
+      <div>
+        <h1 className="text-3xl font-semibold text-black text-center text-wrap">Welcome to ReelsPro</h1>
 
-        <form onSubmit={handleSignup} className="space-y-4 mt-4">
-          {/* Email Input */}
-          <label className="form-control w-full">
-            <div className="label">
-              <span className="text-white">Email</span>
-            </div>
+      </div>
+      <div className="bg-white shadow-xl p-5 pt-8 rounded-xl h-[50%] sm:w-[30%]  border-2 border-black">
+        <form onSubmit={handleSignup} className="space-y-4 ">
+         
+          <label className="form-control  w-full">
+            
+             
             <input
               type="email"
               placeholder="Enter your email"
-              className="input input-bordered w-full bg-white text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              className="input border-2 border-gray-300 w-full  bg-white text-primaryh focus:outline-none focus:ring-2 focus:ring-primaryh"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -67,36 +67,35 @@ export default function SignupPage() {
 
           {/* Password Input */}
           <label className="form-control w-full">
-            <div className="label">
-              <span className="text-white">Password</span>
-            </div>
+            
             <input
               type="password"
               placeholder="********"
-              className="input input-bordered w-full bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              className="input border-gray-300 w-full bg-white text-primaryh focus:outline-none focus:ring-2 focus:ring-primaryh"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </label>
 
+
           {/* Signup Button */}
           <button
             type="submit"
-            className="btn btn-primary w-full hover:bg-primary-focus transition-all duration-200"
+            className="btn btn-card bg-cardbg text-white w-full hover:bg-cardbg2 transition-all duration-200"
           >
             Sign Up
           </button>
         </form>
 
         {/* OR Divider */}
-        <div className="divider text-gray-400">OR</div>
+        <div className="divider text-gray-800">OR</div>
 
         {providers &&
               Object.values(providers).map((provider) =>
                 provider.id !== "credentials" ? (
                   <button
-                    className="px-12 py-4 rounded-xl text-black text-lg bg-white hover:bg-gray-300"
+                    className=" w-full px-12 py-4 rounded-xl text-white text-lg bg-cardbg hover:bg-cardbg2"
                     key={provider.id}
                     onClick={() => {
                       signIn(provider.id, { callbackUrl: "/home" });
@@ -106,7 +105,8 @@ export default function SignupPage() {
                   </button>
                 ) : null
               )}
-        <p className="text-center mt-4 text-gray-400">
+
+        <p className="text-center mt-4 text-gray-700">
           Already have an account?{" "}
           <Link href="/login" className="text-primary hover:underline">
             Login

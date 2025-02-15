@@ -10,7 +10,7 @@ const YourReel = ({ videoData }: { videoData:IVideo[] }) => {
   return (
     <div > 
       {videoData.length === 0 ? (
-        <div className='fixed top-[45%] left-[40%] flex p-4 bg-lime-600 rounded-lg text-black justify-center gap-x-2 h-full cursor-pointer  items-center' onClick={() => router.push("/uploadvideos")} >
+        <div className='fixed top-[45%] left-[40%] flex p-4 bg-cardbg rounded-lg text-white justify-center gap-x-2  cursor-pointer  items-center' onClick={() => router.push("/uploadvideos")} >
           <UploadIcon
             
             className="w-12 select-none h-12 "

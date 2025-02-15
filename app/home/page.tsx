@@ -37,7 +37,7 @@ const Page = () => {
   
 
   return (
-    <div className="bg-primarybg h-screen">
+    <div className={`h-screen ${active==="your reels"?'bg-primarybg ':'bg-black '}`}>
       {active === "your reels" ? (
         <div className="flex flex-col gap-y-4">
           <Header />

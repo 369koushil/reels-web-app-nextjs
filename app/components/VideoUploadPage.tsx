@@ -7,6 +7,8 @@ import { myClient } from '../libs/api-client'
 import { Loader2 } from "lucide-react";
 import { useSession } from 'next-auth/react'
 import mongoose from 'mongoose'
+import { useRouter } from "next/navigation";
+import { House } from 'lucide-react'
 
 interface VideoFormData {
     title: string;
@@ -17,7 +19,7 @@ interface VideoFormData {
     isPublic:boolean
   }
 const VideoUploadPage = () => {
-
+   const router=useRouter()
     const [loading, setLoading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const {data:session}=useSession();
@@ -64,7 +66,7 @@ const VideoUploadPage = () => {
       setValue("videoUrl", "");
       setValue("thumbnailUrl", "");
       setUploadProgress(0);
-
+      router.push("/home")
         }catch(err){
             console.log(err)
         }finally{
@@ -86,17 +88,20 @@ const VideoUploadPage = () => {
 
    
   return (
-  <div className='flex flex-col gap-y-12'>
-    <h1 className='text-2xl font-medium flex justify-center select-none pt-4'>Upload reel here </h1>
+    
+  <div className='flex bg-primarybg h-full justify-center gap-y-4 flex-col'>
+    <House onClick={()=>router.push("/home")}  className=' cursor-pointer fixed text-primaryh top-4 right-8'/>
+   
+    <h1 className='text-2xl font-medium flex justify-center  text-primaryh select-none '>Upload here</h1>
 
-    <div className='flex justify-center items-center h-full'>
-     <form className='bg-gray-800 w-[40%] p-4 rounded-lg' onSubmit={handleSubmit(onsubmit)}>
+    <div className='flex justify-center '>
+     <form className='w-[40%] border-2 border-black  bg-white p-4 rounded-lg' onSubmit={handleSubmit(onsubmit)}>
 
-<div className="form-control ">
-        <label className="label text-gray-300 text-lg">Title</label>
+<div className="form-control  ">
+        <label className="label text-primaryh text-lg">Title</label>
         <input
           type="text"
-          className={`input input-bordered ${
+          className={`input border-2 border-gray-200 bg-white input-bordered ${
             errors.title ? "input-error" : ""
           }`}
           {...register("title", { required: "Title is required" })}
@@ -109,9 +114,9 @@ const VideoUploadPage = () => {
       </div>
 
       <div className="form-control">
-        <label className="label text-gray-300 text-lg">Description</label>
+        <label className="label text-primaryh text-lg">Description</label>
         <textarea
-          className={`textarea max-h-36 textarea-bordered h-24 ${
+          className={`textarea border-2 border-gray-200 bg-white max-h-36 textarea-bordered h-24 ${
             errors.description ? "textarea-error" : ""
           }`}
           {...register("description", { required: "Description is required" })}
@@ -125,14 +130,14 @@ const VideoUploadPage = () => {
 
       <div className='flex gap-y-4 flex-col'>
       <div className="form-control">
-        <label className="label text-gray-300 text-lg">Upload Video</label>
+        <label className="label text-primaryh text-lg">Upload Video</label>
         <FileUpload
           fileType="video"
           onSuccess={handleUploadSuccess}
           onProgress={handleUploadProgress}
         />
         {uploadProgress > 0 && (
-          <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+          <div className="w-full  rounded-full h-2.5 mt-2">
             <div
               className="bg-primary h-2.5 rounded-full transition-all duration-300"
               style={{ width: `${uploadProgress}%` }}
@@ -144,14 +149,14 @@ const VideoUploadPage = () => {
       <div className='flex gap-y-4 flex-col'>
       <button
         type="submit"
-        className="btn btn-primary btn-block"
+        className="btn text-black hover:bg-cardbg2 bg-cardbg"
         disabled={loading || uploadProgress<100}
       >
         <div className='flex gap-y-4'>
         {loading ? (
           <>
             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-            Publishing Video...
+           " Publishing Video..."
           </>
         ) : (
           "Publish Video"

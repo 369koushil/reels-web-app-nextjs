@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
+import { Upload } from "lucide-react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -15,6 +16,9 @@ const Header = () => {
         <div className="flex-1">
           <a className="btn btn-ghost text-xl">ReelsPro</a>
         </div>
+        <Link href={'/uploadvideos'}  className="pr-4 cursor-pointer ">
+        <Upload />
+        </Link>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -40,7 +44,7 @@ const Header = () => {
               <li className="py-2">
                 <Link
                   href="/uploadvideos"
-                  className="justify-between border-2 border-black  h-8 font-medium text-base hover:bg-primarynav bg-primarynav"
+                  className="justify-center border-2  border-black  h-8 font-medium text-base hover:bg-primarynav bg-primarynav"
                 >
                   Upload reels
                 </Link>
